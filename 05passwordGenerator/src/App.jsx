@@ -24,6 +24,11 @@ function App() {
       str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     } 
 
+      
+    if(numberAllowed && charAllowed){
+      str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(){}?><";
+    } 
+
    
 
     for (let i = 1; i <= length; i++) {
