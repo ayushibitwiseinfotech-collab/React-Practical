@@ -17,6 +17,30 @@ function TodoItem({ todo }) {
         toggleComplete(todo.id);
     };
 
+    // Confirm before editing a Todo
+    const handleEdit = () => {
+        if (todo.completed) return;
+
+        const confirmEdit = window.confirm(
+            "Are you sure you want to edit this Todo?"
+        );
+
+        if (confirmEdit) {
+            setIsTodoEditable(true);
+        }
+    };
+
+    // Delete Todo with confirmation
+    const handleDelete = () => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this Todo?"
+        );
+
+        if (confirmDelete) {
+            deleteTodo(todo.id);
+        }
+    };
+
     return (
         <div
             className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300 text-black ${
@@ -52,10 +76,11 @@ function TodoItem({ todo }) {
                     if (isTodoEditable) {
                         editTodo();
                     } else {
-                        setIsTodoEditable((prev) => !prev);
+                        handleEdit();
                     }
                 }}
                 disabled={todo.completed}
+                title={isTodoEditable ? "Save Todo" : "Edit Todo"}
             >
                 {isTodoEditable ? "💾" : "✏️"}
             </button>
@@ -64,7 +89,8 @@ function TodoItem({ todo }) {
             <button
                 type="button"
                 className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0"
-                onClick={() => deleteTodo(todo.id)}
+                onClick={handleDelete}
+                title="Delete Todo"
             >
                 ❌
             </button>
